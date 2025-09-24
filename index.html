@@ -329,13 +329,13 @@
                             </div>
                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="adi-highlight.mp4">
                                  <div class="relative">
-                                    <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                    <img src="potw.png" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
                                     <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
                                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
                                     </div>
                                 </div>
                                 <p class="font-bold text-nemtas-dark">Teuku Mavel  <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SF</span></p>
-                                <p class="text-nemtas-blue">#23 - Power Forward </p>
+                                <p class="text-nemtas-blue">#32 - Power Forward </p>
                             </div>
                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="yoga-highlight.mp4">
                                  <div class="relative">
@@ -347,14 +347,15 @@
                                 <p class="font-bold text-nemtas-dark">Makarim <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PF</span></p>
                                 <p class="text-nemtas-blue">#15 - Power Forward</p>
                             </div>
-                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="dika-highlight.mp4">
+                            <!-- === MODIFIED PLAYER CARD FOR RIDIT === -->
+                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="Radit-highlight.mp4, radit-highlight2.mp4">
                                 <div class="relative">
                                     <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
                                     <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
                                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
                                     </div>
                                 </div>
-                                <p class="font-bold text-nemtas-dark">Riditya <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SG</span></p>
+                                <p class="font-bold text-nemtas-dark">Radit <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PG</span></p>
                                 <p class="text-nemtas-blue">#12 - Point Guard</p>
                             </div>
                         </div>
@@ -530,7 +531,7 @@
                             <div class="p-6">
                                 <p class="text-sm text-gray-500 mb-2">Sep 8, 2025</p>
                                 <h4 class="font-bold text-xl mb-3 text-nemtas-dark">Nemtas Secures Victory in Season Opener!</h4>
-                                <p class="text-gray-700">The boys team kicked off the season with a decisive 68-55 win against SMAN 2 Tangsel. Captain Bari Achmad led the team with 22 points.</p>
+                                <p class="text-gray-700">Nemtas triumphed over SMK Fadillah with a score of 39-19, showcasing incredible teamwork.</p>
                             </div>
                         </div>
                         <!-- News Card 3 -->
@@ -717,7 +718,7 @@
         playerVideoCards.forEach(card => {
             card.addEventListener('click', () => {
                 const videoFiles = card.dataset.videoFiles.split(',').map(file => file.trim());
-                if (videoFiles.length > 0) {
+                if (videoFiles.length > 0 && videoFiles[0]) { // Check if not empty
                     currentSlide = 0;
                     totalSlides = videoFiles.length;
                     videoSlidesContainer.innerHTML = ''; // Clear previous slides
@@ -728,7 +729,7 @@
                         
                         slide.innerHTML = `
                             <div class="relative w-full" style="padding-bottom: 56.25%;"> <!-- 16:9 -->
-                                <video class="absolute top-0 left-0 w-full h-full" src="${file}" controls autoplay></video>
+                                <video class="absolute top-0 left-0 w-full h-full" src="${file}" controls autoplay muted loop playsinline></video>
                             </div>
                         `;
                         videoSlidesContainer.appendChild(slide);
@@ -742,6 +743,9 @@
 
         function updateSlider() {
             videoSlidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            // Hide/show nav buttons
+            prevVideoBtn.style.display = totalSlides > 1 ? 'block' : 'none';
+            nextVideoBtn.style.display = totalSlides > 1 ? 'block' : 'none';
         }
 
         function stopAllVideos() {
@@ -829,6 +833,3 @@
 
 </body>
 </html>
-
-
-
