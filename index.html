@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemtas Basketball Club - SMKN 6 South Tangerang</title>
+    <title>Nemtas Basketball Club - SMKN 6 South Tangerang by barry</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Updated Google Fonts link to include Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        // Changed default sans-serif font to Poppins
                         'sans': ['Poppins', 'sans-serif'],
                         'heading': ['Anton', 'sans-serif'],
                     },
@@ -28,51 +26,26 @@
         }
     </script>
     <style>
-        /* --- START: Corrected Custom Scrollbar Logic --- */
-        /* --- Default (Mobile-First) Styles --- */
-        /* For Firefox */
+        /* --- Custom Scrollbar --- */
         html {
             scrollbar-width: thin;
-            scrollbar-color: #FFC72C #f1f1f1; /* Yellow thumb for mobile */
+            scrollbar-color: #FFC72C #f1f1f1;
         }
-
-        /* For Webkit-based browsers (Chrome, Safari, Edge) */
         ::-webkit-scrollbar {
             width: 8px;
         }
-
         ::-webkit-scrollbar-track {
-            background: transparent; /* Hide the track on mobile to remove the white line */
+            background: #f1f1f1;
         }
-
         ::-webkit-scrollbar-thumb {
-            background: #FFC72C; /* Yellow thumb for mobile */
+            background: #0D244F;
             border-radius: 20px;
         }
-
-        /* --- Desktop Overrides --- */
-        @media (min-width: 768px) {
-            /* For Firefox */
-            html {
-                /* Normal State: Blue thumb, light track */
-                scrollbar-color: #0D244F #f1f1f1;
-            }
-
-            /* For Webkit */
-            ::-webkit-scrollbar-track {
-                background: #f1f1f1; /* Light grey track for PC */
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background: #0D244F; /* Blue thumb for PC (normal state) */
-            }
-            
-            ::-webkit-scrollbar-thumb:hover {
-                background: #FFC72C; /* Yellow on hover for PC */
-            }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFC72C;
         }
-        /* --- END: Corrected Custom Scrollbar Logic --- */
         
+        /* --- General Styles --- */
         .hero-bg {
             background-image: linear-gradient(rgba(13, 36, 79, 0.85), rgba(13, 36, 79, 0.45)), url('main.jpg');
             background-size: cover;
@@ -82,15 +55,15 @@
             color: #FFC72C;
             border-bottom: 2px solid #FFC72C;
         }
-        .player-card .overlay, .gallery-item .overlay {
+        .gallery-item .overlay {
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        .player-card:hover .overlay, .gallery-item:hover .overlay {
+        .gallery-item:hover .overlay {
             opacity: 1;
         }
 
-        /* --- START: New styles for animated mobile menu icon --- */
+        /* --- Mobile Menu Icon Animation --- */
         .hamburger-line {
             display: block;
             width: 100%;
@@ -109,7 +82,8 @@
         #mobile-menu-button.open .line-3 {
             transform: translateY(-8px) rotate(-45deg);
         }
-        /* Mobile Menu Slide Animation */
+        
+        /* --- Mobile Menu Panel Animation --- */
         #mobile-menu {
             transition: max-height 0.4s ease-out, padding 0.4s ease-out;
             max-height: 0;
@@ -118,29 +92,106 @@
             padding-bottom: 0;
         }
         #mobile-menu.open {
-            max-height: 100vh; /* A safe, large value */
-            padding-top: 0.5rem; /* original pt-2 */
-            padding-bottom: 1rem; /* original pb-4 */
+            max-height: 100vh; 
+            padding-top: 0.5rem;
+            padding-bottom: 1rem;
         }
-        /* --- END: New styles for animated mobile menu icon --- */
 
-        /* --- START: Animation styles for news cards --- */
-        .news-card {
+        /* --- Content Card Animation --- */
+        .animated-card {
             opacity: 0;
             transform: scale(0.95) translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease-in-out;
         }
-
-        .news-card.is-visible {
+        .animated-card.is-visible {
             opacity: 1;
             transform: scale(1) translateY(0);
         }
-        
-        .news-card:hover {
-            transform: scale(1.05) translateY(-5px);
+        .player-card:hover, .animated-card:hover {
+            transform: scale(1.03);
             box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         }
-         /* --- END: Animation styles for news cards --- */
+
+        /* --- Merchandise Section --- */
+        .size-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .size-btn.active {
+            background-color: #0D244F;
+            color: white;
+            border-color: #0D244F;
+            transform: scale(1.1);
+        }
+        .price-animation {
+            animation: price-pop 0.4s ease-out;
+        }
+        @keyframes price-pop {
+            0% { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* --- Jersey Slider --- */
+        .jersey-slider { position: relative; }
+        #jersey-slides-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .jersey-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            z-index: 10;
+            transition: background-color 0.2s;
+        }
+        .slider-nav:hover { background-color: rgba(0,0,0,0.6); }
+        #prev-jersey { left: 1rem; }
+        #next-jersey { right: 1rem; }
+        .slider-dots {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .slider-dot {
+            cursor: pointer;
+            height: 0.75rem;
+            width: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .slider-dot.active { background-color: white; }
+        
+        /* --- Player Detail Modal --- */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out;
+            transform: scale(0.95) translateY(20px);
+        }
+        .modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal.open .modal-content {
+            transform: scale(1) translateY(0);
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
@@ -148,13 +199,14 @@
     <div class="overflow-x-hidden">
         <!-- Header & Navigation -->
         <header id="header" class="bg-nemtas-blue fixed top-0 left-0 right-0 z-50 shadow-lg text-white transition-all duration-300">
-            <div class="container mx-auto px-6 py-4">
-                <div class="flex justify-between items-center">
-                    <a href="#home" class="flex items-center text-3xl font-heading tracking-wider">
-                        <img src="nemtas blue.png" alt="Nemtas Logo" class="h-10 mr-3">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="flex justify-between items-center py-4">
+                    <a href="#home" class="flex items-center text-2xl lg:text-3xl font-heading tracking-wider">
+                        <img src="nemtas blue.png" alt="Nemtas Logo" class="h-8 sm:h-10 mr-2 sm:mr-3">
                         NEMTAS<span class="text-nemtas-yellow">.</span>
                     </a>
-                    <nav class="hidden md:flex space-x-8 items-center text-sm">
+                    
+                    <nav class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-sm">
                         <a href="#about" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">About</a>
                         <a href="#mvp" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">MVP</a>
                         <a href="#teams" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">Teams</a>
@@ -163,75 +215,79 @@
                         <a href="#news" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">News</a>
                         <a href="#gallery" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">Gallery</a>
                         <a href="#testimonials" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">Testimonials</a>
+                        <a href="#merchandise" class="hover:text-nemtas-yellow transition duration-300 pb-1 border-b-2 border-transparent">Merchandise</a>
                     </nav>
-                     <a href="#join" class="hidden lg:inline-block bg-nemtas-yellow text-nemtas-blue font-bold py-2 px-5 rounded-full hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
-                        JOIN US
-                    </a>
-                    <!-- Updated Mobile Menu Button -->
-                    <button id="mobile-menu-button" class="md:hidden flex flex-col justify-around w-6 h-6 focus:outline-none z-50">
-                        <span class="sr-only">Buka menu utama</span>
-                        <span class="hamburger-line line-1"></span>
-                        <span class="hamburger-line line-2"></span>
-                        <span class="hamburger-line line-3"></span>
-                    </button>
+
+                    <div class="flex items-center">
+                         <a href="#join" class="hidden sm:inline-block lg:hidden xl:inline-block bg-nemtas-yellow text-nemtas-blue font-bold py-2 px-5 rounded-full hover:bg-yellow-300 transition duration-300 transform hover:scale-105 text-sm">
+                            JOIN US
+                        </a>
+                        <button id="mobile-menu-button" class="lg:hidden ml-4 flex flex-col justify-around w-6 h-6 focus:outline-none z-50">
+                            <span class="sr-only">Buka menu utama</span>
+                            <span class="hamburger-line line-1"></span>
+                            <span class="hamburger-line line-2"></span>
+                            <span class="hamburger-line line-3"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden px-6">
-                <a href="#about" class="block py-2">About</a>
-                <a href="#mvp" class="block py-2">MVP</a>
-                <a href="#teams" class="block py-2">Teams</a>
-                <a href="#schedule" class="block py-2">Schedule</a>
-                <a href="#join" class="block py-2">Contact</a>
-                <a href="#news" class="block py-2">News</a>
-                <a href="#gallery" class="block py-2">Gallery</a>
-                <a href="#testimonials" class="block py-2">Testimonials</a>
-                <a href="#join" class="block mt-4 bg-nemtas-yellow text-nemtas-blue font-bold py-2 px-4 rounded-full text-center">JOIN US</a>
+            <div id="mobile-menu" class="lg:hidden px-6 sm:px-8 bg-nemtas-dark">
+                <a href="#about" class="block py-3 border-t border-gray-700">About</a>
+                <a href="#mvp" class="block py-3 border-t border-gray-700">MVP</a>
+                <a href="#teams" class="block py-3 border-t border-gray-700">Teams</a>
+                <a href="#schedule" class="block py-3 border-t border-gray-700">Schedule</a>
+                <a href="#join" class="block py-3 border-t border-gray-700">Contact</a>
+                <a href="#news" class="block py-3 border-t border-gray-700">News</a>
+                <a href="#gallery" class="block py-3 border-t border-gray-700">Gallery</a>
+                <a href="#testimonials" class="block py-3 border-t border-gray-700">Testimonials</a>
+                <a href="#merchandise" class="block py-3 border-t border-gray-700">Merchandise</a>
+                <a href="#join" class="block sm:hidden mt-4 bg-nemtas-yellow text-nemtas-blue font-bold py-2 px-4 rounded-full text-center">JOIN US</a>
             </div>
         </header>
 
         <main>
             <!-- Hero Section -->
             <section id="home" class="hero-bg h-screen flex items-center justify-center text-white text-center">
-                <div class="container mx-auto px-6">
-                    <p class="text-nemtas-yellow font-semibold tracking-widest">THE OFFICIAL BASKETBALL CLUB OF SMKN 6 SOUTH TANGERANG</p>
-                    <h1 class="text-5xl sm:text-6xl md:text-8xl font-heading my-4 leading-tight">NEMTAS BASKETBALL CLUB</h1>
-                    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Forging champions through discipline, teamwork, and relentless spirit.</p>
-                    <a href="#schedule" class="bg-nemtas-yellow text-nemtas-blue font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
+                <div class="container mx-auto px-4 sm:px-6">
+                    <p class="text-nemtas-yellow font-semibold tracking-widest text-sm sm:text-base">THE OFFICIAL BASKETBALL CLUB OF SMKN 6 SOUTH TANGERANG</p>
+                    <h1 class="text-4xl sm:text-6xl lg:text-8xl font-heading my-4 leading-tight">NEMTAS BASKETBALL CLUB</h1>
+                    <p class="text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8">Forging champions through discipline, teamwork, and relentless spirit.</p>
+                    <a href="#schedule" class="bg-nemtas-yellow text-nemtas-blue font-bold py-3 px-8 rounded-full text-base sm:text-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
                         VIEW SCHEDULE
                     </a>
                 </div>
             </section>
 
             <!-- About Section -->
-            <section id="about" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
+            <section id="about" class="py-16 sm:py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">ABOUT THE CLUB</h2>
-                        <p class="text-lg text-gray-600 mt-2">More than just a team, we are a family.</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">ABOUT THE CLUB</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">More than just a team, we are a family.</p>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <img src="main.jpg" alt="Nemtas Team" class="rounded-lg shadow-xl">
+                    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div class="animated-card">
+                            <img src="main.jpg" alt="Nemtas Team" class="rounded-lg shadow-xl w-full">
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-nemtas-dark mb-4">Our Mission</h3>
+                            <h3 class="text-xl sm:text-2xl font-bold text-nemtas-dark mb-4">Our Mission</h3>
                             <p class="mb-6 text-gray-700">The Nemtas Basketball Club is dedicated to developing student-athletes of character. We provide a structured, competitive, and supportive environment where players can hone their basketball skills while learning the invaluable life lessons of teamwork, perseverance, leadership, and sportsmanship.</p>
-                            <h3 class="text-2xl font-bold text-nemtas-dark mb-4">Our Home Court</h3>
+                            <h3 class="text-xl sm:text-2xl font-bold text-nemtas-dark mb-4">Our Home Court</h3>
                             <p class="text-gray-700">All practices and home games are held at the official SMKN 6 South Tangerang gymnasium. We take pride in our facility and the incredible support from our school community.</p>
                         </div>
                     </div>
                     <!-- Meet the Coach -->
-                <div class="mt-20">
-                    <h3 class="text-3xl font-heading text-nemtas-blue text-center mb-10">MEET THE COACH</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center px-8">
-                        <div class="w-full max-w-xs mx-auto md:col-span-1">
-                            <img src="coach.png" alt="Coach Budi Santoso" class="rounded-lg shadow-xl w-full border-4 border-nemtas-yellow">
+                <div class="mt-16 sm:mt-20">
+                    <h3 class="text-2xl sm:text-3xl font-heading text-nemtas-blue text-center mb-10">MEET THE COACH</h3>
+                    <div class="flex flex-col md:flex-row gap-8 items-center max-w-4xl mx-auto">
+                        <div class="w-48 md:w-1/3 flex-shrink-0 animated-card">
+                            <img src="coach.png" alt="Coach Rudiyansyah" class="rounded-lg shadow-xl w-full border-4 border-nemtas-yellow">
                         </div>
-                        <div class="md:col-span-2 text-center md:text-left">
-                            <h4 class="text-4xl font-heading text-nemtas-dark">RUDIYANSYAH</h4>
+                        <div class="md:w-2/3 text-center md:text-left">
+                            <h4 class="text-3xl sm:text-4xl font-heading text-nemtas-dark">RUDIYANSYAH</h4>
                             <p class="text-nemtas-blue font-semibold text-lg mb-4">Head Coach</p>
-                            <p class="text-gray-700"> pelatih yang melatih banyak siswa siswi ekskul basket dan tim olahraga untuk membantu mereka mencapai performa tertinggi dan meraih prestasi.</p>
+                            <p class="text-gray-700">Pelatih yang melatih banyak siswa siswi ekskul basket dan tim olahraga untuk membantu mereka mencapai performa tertinggi dan meraih prestasi.</p>
                         </div>
                         </div>
                     </div>
@@ -239,33 +295,33 @@
             </section>
 
             <!-- MVP Section -->
-            <section id="mvp" class="py-20 bg-nemtas-dark text-white">
-                <div class="container mx-auto px-6">
+            <section id="mvp" class="py-16 sm:py-20 bg-nemtas-dark text-white">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-white">PLAYER OF THE YEAR</h2>
-                        <p class="text-lg text-nemtas-yellow mt-2 font-semibold">Recognizing Excellence & Hard Work</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-white">PLAYER OF THE YEAR</h2>
+                        <p class="text-base sm:text-lg text-nemtas-yellow mt-2 font-semibold">Recognizing Excellence & Hard Work</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center bg-nemtas-blue p-8 rounded-lg shadow-2xl">
-                        <div class="md:col-span-2 w-full max-w-sm mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center bg-nemtas-blue p-6 sm:p-8 rounded-lg shadow-2xl animated-card">
+                        <div class="md:col-span-2 w-full max-w-xs mx-auto">
                             <img src="bari.jpg" alt="MVP Bari Achmad" class="rounded-lg shadow-xl w-full">
                         </div>
                         <div class="md:col-span-3 text-center md:text-left">
                             <p class="text-nemtas-yellow font-bold text-lg">#21 - Shooting Guard</p>
-                            <h3 class="text-5xl font-heading my-2">Bari Achmad</h3>
+                            <h3 class="text-4xl sm:text-5xl font-heading my-2">Bari Achmad</h3>
                             <p class="text-gray-300 mb-6">
                                 As this year's Most Valuable Player, Bari has shown exceptional leadership and skill. His court vision and clutch shooting have been instrumental in our recent victories. With an average of 18 points and 7 assists per game, Bari consistently elevates the team's performance.
                             </p>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
                                 <div class="bg-nemtas-dark p-4 rounded">
-                                    <p class="text-3xl font-bold text-nemtas-yellow">18.5</p>
-                                    <p class="text-xs uppercase tracking-wider">Points Per Game</p>
+                                    <p class="text-2xl sm:text-3xl font-bold text-nemtas-yellow">18.5</p>
+                                    <p class="text-xs uppercase tracking-wider">Points/Game</p>
                                 </div>
                                 <div class="bg-nemtas-dark p-4 rounded">
-                                    <p class="text-3xl font-bold text-nemtas-yellow">7.2</p>
-                                    <p class="text-xs uppercase tracking-wider">Assists Per Game</p>
+                                    <p class="text-2xl sm:text-3xl font-bold text-nemtas-yellow">7.2</p>
+                                    <p class="text-xs uppercase tracking-wider">Assists/Game</p>
                                 </div>
                                 <div class="bg-nemtas-dark p-4 rounded">
-                                    <p class="text-3xl font-bold text-nemtas-yellow">75%</p>
+                                    <p class="text-2xl sm:text-3xl font-bold text-nemtas-yellow">75%</p>
                                     <p class="text-xs uppercase tracking-wider">3-Pt %</p>
                                 </div>
                             </div>
@@ -275,16 +331,16 @@
                     <!-- Player of the Week Section -->
                     <div class="mt-16">
                         <div class="text-center mb-12">
-                            <h2 class="text-3xl font-heading text-white">PLAYER OF THE WEEK</h2>
-                            <p class="text-md text-nemtas-yellow mt-1 font-semibold">Weekly Standout Performance</p>
+                            <h2 class="text-2xl sm:text-3xl font-heading text-white">PLAYER OF THE WEEK</h2>
+                            <p class="text-sm sm:text-md text-nemtas-yellow mt-1 font-semibold">Weekly Standout Performance</p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center bg-nemtas-blue p-8 rounded-lg shadow-2xl">
-                             <div class="md:col-span-2 w-full max-w-sm mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center bg-nemtas-blue p-6 sm:p-8 rounded-lg shadow-2xl animated-card">
+                             <div class="md:col-span-2 w-full max-w-xs mx-auto">
                                 <img src="potw.png" alt="Player of the week Mavel" class="rounded-lg shadow-xl w-full">
                             </div>
                             <div class="md:col-span-3 text-center md:text-left">
                                 <p class="text-nemtas-yellow font-bold text-lg">#32 - Power Forward</p>
-                                <h3 class="text-4xl font-heading my-2">Teuku Mavel</h3>
+                                <h3 class="text-3xl sm:text-4xl font-heading my-2">Teuku Mavel</h3>
                                 <p class="text-gray-300">
                                     Mavel's defensive prowess was unmatched in our last game. With 5 steals and several key blocks, he was a wall on the court, shutting down the opponent's top scorer and creating crucial turnovers that led to our victory.
                                 </p>
@@ -296,96 +352,134 @@
             </section>
 
             <!-- Teams Section -->
-            <section id="teams" class="py-20 bg-gray-100">
-                <div class="container mx-auto px-6">
+            <section id="teams" class="py-16 sm:py-20 bg-gray-100">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">TEAM ROSTERS</h2>
-                        <p class="text-lg text-gray-600 mt-2">Meet the pride of SMKN 6 South Tangerang.</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">TEAM ROSTERS</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">Meet the pride of SMKN 6 South Tangerang.</p>
                     </div>
-                    <!-- Team Rosters -->
                     <div>
-                        <h3 class="text-3xl font-heading text-nemtas-dark mb-6">BOYS TEAM</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                            <!-- Player Card with local video files -->
-                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="bari-highlight.mp4, bari-highlight2.mp4">
-                                <div class="relative">
-                                    <img src="bari.jpg" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow object-cover">
-                                    <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                                    </div>
-                                </div>
-                                <p class="font-bold text-nemtas-dark">Bari Achmad <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SG</span></p>
-                                <p class="text-nemtas-blue">#21 - Shooting Guard</p>
+                        <h3 class="text-2xl sm:text-3xl font-heading text-nemtas-dark mb-6">BOYS TEAM</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                            <!-- Player Cards with Data Attributes -->
+                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card" 
+                                data-player-name="Bari Achmad"
+                                data-player-image="bari.jpg"
+                                data-player-number="#21"
+                                data-player-position="Shooting Guard"
+                                data-player-bio="Halo! Saya Bari, seorang shooting guard yang bersemangat. Kecepatan dan tembakan tiga angka adalah andalan saya di lapangan."
+                                data-player-videos="bari-highlight.mp4,bari-highlight2.mp4">
+                                <img src="bari.jpg" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow object-cover">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Bari Achmad <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SG</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#21 - Shooting Guard</p>
                             </div>
-                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="eko-highlight.mp4">
-                                 <div class="relative">
-                                    <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                    <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                                    </div>
-                                </div>
-                                <p class="font-bold text-nemtas-dark">Ibnu Syahlendra <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">C</span></p>
-                                <p class="text-nemtas-blue">#1 - Point Guard</p>
+
+                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Ibnu Syahlendra"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Ibnu"
+                                data-player-number="#1"
+                                data-player-position="Center"
+                                data-player-bio="Halo! Saya Ibnu. Sebagai center, saya adalah benteng pertahanan tim dan selalu siap untuk rebound."
+                                data-player-videos="">
+                                 <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Ibnu Syahlendra <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">C</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#1 - Center</p>
                             </div>
-                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="adi-highlight.mp4">
-                                 <div class="relative">
-                                    <img src="potw.png" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                    <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                                    </div>
-                                </div>
-                                <p class="font-bold text-nemtas-dark">Teuku Mavel  <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SF</span></p>
-                                <p class="text-nemtas-blue">#32 - Power Forward </p>
+                            
+                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Teuku Mavel"
+                                data-player-image="potw.png"
+                                data-player-number="#32"
+                                data-player-position="Small Forward"
+                                data-player-bio="Halo, saya Mavel. Saya suka bermain di posisi small forward, mengandalkan kelincahan untuk mencetak poin dan bertahan."
+                                data-player-videos="mavel-highlight.mp4">
+                                 <img src="potw.png" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow object-cover">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Teuku Mavel  <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SF</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#32 - Small Forward </p>
                             </div>
-                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="yoga-highlight.mp4">
-                                 <div class="relative">
-                                    <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                    <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                                    </div>
-                                </div>
-                                <p class="font-bold text-nemtas-dark">Makarim <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PF</span></p>
-                                <p class="text-nemtas-blue">#15 - Power Forward</p>
+
+                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Makarim"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Makarim"
+                                data-player-number="#15"
+                                data-player-position="Power Forward"
+                                data-player-bio="Saya Makarim, power forward tim. Kekuatan fisik dan kemampuan post-up adalah senjata utama saya."
+                                data-player-videos="">
+                                 <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Makarim <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PF</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#15 - Power Forward</p>
                             </div>
-                            <!-- === MODIFIED PLAYER CARD FOR RIDIT === -->
-                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer" data-video-files="radit-highlight.mp4, radit-highlight2.mp4">
-                                <div class="relative">
-                                    <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                    <div class="overlay absolute inset-0 bg-black bg-opacity-60 rounded-full flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                                    </div>
-                                </div>
-                                <p class="font-bold text-nemtas-dark">Radit <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PG</span></p>
-                                <p class="text-nemtas-blue">#12 - Point Guard</p>
+
+                            <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Radit"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Radit"
+                                data-player-number="#12"
+                                data-player-position="Point Guard"
+                                data-player-bio="Saya Radit. Sebagai point guard, tugas saya adalah mengatur serangan dan memberikan assist matang untuk rekan setim."
+                                data-player-videos="radit-highlight.mp4, radit-highlight2.mp4">
+                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Radit <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PG</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#12 - Point Guard</p>
                             </div>
                         </div>
 
-                        <h3 class="text-3xl font-heading text-nemtas-dark mt-12 mb-6">GIRLS TEAM</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                             <div class="bg-white shadow-md p-4 rounded-lg text-center">
-                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                <p class="font-bold text-nemtas-dark">Siti Rahayu <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SG</span></p>
-                                <p class="text-nemtas-blue">#5 - Shooting Guard</p>
+                        <h3 class="text-2xl sm:text-3xl font-heading text-nemtas-dark mt-12 mb-6">GIRLS TEAM</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                            <!-- Girls Team Player Cards with Data Attributes -->
+                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Siti Rahayu"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Siti"
+                                data-player-number="#5"
+                                data-player-position="Shooting Guard"
+                                data-player-bio="Halo, saya Siti. Akurasi tembakan jarak jauh adalah keahlian saya sebagai shooting guard."
+                                data-player-videos="">
+                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Siti Rahayu <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SG</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#5 - Shooting Guard</p>
                             </div>
-                            <div class="bg-white shadow-md p-4 rounded-lg text-center">
-                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                <p class="font-bold text-nemtas-dark">Dewi Lestari <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PF</span></p>
-                                <p class="text-nemtas-blue">#11 - Power Forward</p>
+                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Dewi Lestari"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Dewi"
+                                data-player-number="#11"
+                                data-player-position="Power Forward"
+                                data-player-bio="Saya Dewi, seorang power forward yang tangguh. Saya suka berduel di bawah ring."
+                                data-player-videos="">
+                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Dewi Lestari <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PF</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#11 - Power Forward</p>
                             </div>
-                             <div class="bg-white shadow-md p-4 rounded-lg text-center">
-                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                <p class="font-bold text-nemtas-dark">Fitriani Indah <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PG</span></p>
-                                <p class="text-nemtas-blue">#9 - Point Guard</p>
+                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Fitriani Indah"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Fitri"
+                                data-player-number="#9"
+                                data-player-position="Point Guard"
+                                data-player-bio="Hai, saya Fitri! Sebagai playmaker tim, saya senang menciptakan peluang untuk teman-teman."
+                                data-player-videos="">
+                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Fitriani Indah <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">PG</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#9 - Point Guard</p>
                             </div>
-                             <div class="bg-white shadow-md p-4 rounded-lg text-center">
-                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                <p class="font-bold text-nemtas-dark">Maya Sari <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">C</span></p>
-                                <p class="text-nemtas-blue">#21 - Center</p>
+                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Maya Sari"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Maya"
+                                data-player-number="#21"
+                                data-player-position="Center"
+                                data-player-bio="Saya Maya, center tim putri. Saya fokus pada pertahanan dan mengamankan area paint."
+                                data-player-videos="">
+                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Maya Sari <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">C</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#21 - Center</p>
                             </div>
-                             <div class="bg-white shadow-md p-4 rounded-lg text-center">
-                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
-                                <p class="font-bold text-nemtas-dark">Lina Puspita <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SF</span></p>
-                                <p class="text-nemtas-blue">#15 - Small Forward</p>
+                             <div class="player-card bg-white shadow-md p-4 rounded-lg text-center cursor-pointer animated-card"
+                                data-player-name="Lina Puspita"
+                                data-player-image="https://placehold.co/400x400/EEEEEE/333333?text=Lina"
+                                data-player-number="#15"
+                                data-player-position="Small Forward"
+                                data-player-bio="Saya Lina, small forward yang serba bisa. Saya bisa mencetak poin dari berbagai posisi di lapangan."
+                                data-player-videos="">
+                                <img src="https://placehold.co/150x150/EEEEEE/333333?text=Player" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 border-2 border-nemtas-yellow">
+                                <p class="font-bold text-nemtas-dark text-sm sm:text-base">Lina Puspita <span class="text-xs bg-nemtas-yellow text-nemtas-blue font-bold px-2 py-1 rounded-full align-middle">SF</span></p>
+                                <p class="text-nemtas-blue text-xs sm:text-sm">#15 - Small Forward</p>
                             </div>
                         </div>
                     </div>
@@ -393,13 +487,12 @@
             </section>
 
             <!-- Schedule Section -->
-            <section id="schedule" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
+            <section id="schedule" class="py-16 sm:py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">SCHEDULE & RESULTS</h2>
-                        <p class="text-lg text-gray-600 mt-2">Catch us in action!</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">SCHEDULE & RESULTS</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">Catch us in action!</p>
                     </div>
-                    <!-- Wrapper div to contain table overflow and prevent page gap -->
                     <div class="overflow-x-auto shadow-lg rounded-lg">
                         <table class="w-full min-w-[640px] text-sm text-left text-gray-500">
                             <thead class="text-xs text-white uppercase bg-nemtas-blue">
@@ -444,16 +537,15 @@
             </section>
 
             <!-- Join Us Section / Contact Section -->
-            <section id="join" class="py-20 bg-gray-100">
-                <div class="container mx-auto px-6">
+            <section id="join" class="py-16 sm:py-20 bg-gray-100">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">CONTACT & JOIN US</h2>
-                        <p class="text-lg text-gray-600 mt-2">Ready to join the legacy or have a question? Get in touch!</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">CONTACT & JOIN US</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">Ready to join the legacy or have a question? Get in touch!</p>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-12 bg-white p-10 rounded-lg shadow-xl">
-                        <!-- Left Column: Information -->
+                    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 bg-white p-6 sm:p-10 rounded-lg shadow-xl">
                         <div>
-                            <h3 class="text-2xl font-bold text-nemtas-dark mb-4">How to Join</h3>
+                            <h3 class="text-xl sm:text-2xl font-bold text-nemtas-dark mb-4">How to Join</h3>
                             <p class="mb-4 text-gray-700">We are always looking for dedicated students from SMKN 6 South Tangerang to join our teams. Registration is open all year round.</p>
                             <ul class="space-y-3 list-none text-gray-700 mb-6 pl-0">
                                 <li class="flex items-start">
@@ -466,7 +558,7 @@
                                 </li>
                             </ul>
             
-                            <h3 class="text-2xl font-bold text-nemtas-dark mb-4 mt-8">Contact Information</h3>
+                            <h3 class="text-xl sm:text-2xl font-bold text-nemtas-dark mb-4 mt-8">Contact Information</h3>
                             <div class="space-y-4">
                                 <div class="flex items-start">
                                     <svg class="w-6 h-6 text-nemtas-blue mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -490,9 +582,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Right Column: Form -->
                         <div>
-                             <h3 class="text-2xl font-bold text-nemtas-dark mb-4">Send Us a Message</h3>
+                             <h3 class="text-xl sm:text-2xl font-bold text-nemtas-dark mb-4">Send Us a Message</h3>
                              <form action="https://formspree.io/f/mnngaage" method="POST">
                                 <div class="mb-4">
                                     <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
@@ -518,29 +609,35 @@
             </section>
 
              <!-- News Section -->
-            <section id="news" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
+            <section id="news" class="py-16 sm:py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">LATEST NEWS</h2>
-                        <p class="text-lg text-gray-600 mt-2">Stay updated with our latest achievements and stories.</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">LATEST NEWS</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">Stay updated with our latest achievements and stories.</p>
                     </div>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <!-- News Card 1 -->
-                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden news-card">
-                            <img src="Victory.jpg" alt="Game victory" class="w-full h-64 object-cover">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden animated-card">
+                            <img src="Victory.jpg" alt="Game victory" class="w-full h-56 object-cover">
                             <div class="p-6">
                                 <p class="text-sm text-gray-500 mb-2">Sep 8, 2025</p>
                                 <h4 class="font-bold text-xl mb-3 text-nemtas-dark">Nemtas Secures Victory in Season Opener!</h4>
                                 <p class="text-gray-700">Nemtas triumphed over SMK Fadillah with a score of 39-19, showcasing incredible teamwork.</p>
                             </div>
                         </div>
-                        <!-- News Card 3 -->
-                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden news-card" style="transition-delay: 300ms;">
-                            <img src="https://placehold.co/600x400/FFC72C/000000?text=Community+Day" alt="Community" class="w-full h-64 object-cover">
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden animated-card" style="transition-delay: 150ms;">
+                            <img src="game time.jpg" alt="Team strategy session" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <p class="text-sm text-gray-500 mb-2">Sep 10, 2025</p>
+                                <h4 class="font-bold text-xl mb-3 text-nemtas-dark">Coach Unveils New Strategies for Upcoming Match</h4>
+                                <p class="text-gray-700">Coach Rudiyansyah held a special training session focusing on new defensive plays and fast-break tactics.</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden animated-card" style="transition-delay: 300ms;">
+                            <img src="https://placehold.co/600x400/FFC72C/000000?text=Community+Day" alt="Community" class="w-full h-56 object-cover">
                             <div class="p-6">
                                 <p class="text-sm text-gray-500 mb-2">Sep 12, 2025</p>
                                 <h4 class="font-bold text-xl mb-3 text-nemtas-dark">Successful Community Coaching Clinic</h4>
-                                <p class="text-gray-700">Last weekend, our players and coaches hosted a free basketball clinic for local kids, sharing their love for the game with the community.</p>
+                                <p class="text-gray-700">Last weekend, our players and coaches hosted a free basketball clinic for local kids, sharing their love for the game.</p>
                             </div>
                         </div>
                     </div>
@@ -548,33 +645,33 @@
             </section>
 
             <!-- Gallery Section -->
-            <section id="gallery" class="py-20 bg-gray-100">
-                <div class="container mx-auto px-6">
+            <section id="gallery" class="py-16 sm:py-20 bg-gray-100">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">PHOTO GALLERY</h2>
-                        <p class="text-lg text-gray-600 mt-2">A glimpse into our journey, on and off the court.</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">PHOTO GALLERY</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">A glimpse into our journey, on and off the court.</p>
                     </div>
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+                        <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg animated-card">
                             <img src="game time.jpg" alt="Gallery Image 1" class="w-full h-full object-cover transform hover:scale-110 transition duration-300">
                             <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                                  <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" /></svg>
                             </div>
                         </div>
-                         <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg">
+                         <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg animated-card">
                             <img src="team huddle.png" alt="Gallery Image 2" class="w-full h-full object-cover transform hover:scale-110 transition duration-300">
                              <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                                  <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" /></svg>
                             </div>
                         </div>
-                        <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://placehold.co/600x600/CCCCCC/000000?text=Practice" alt="Gallery Image 4" class="w-full h-full object-cover transform hover:scale-110 transition duration-300">
+                        <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg animated-card">
+                            <img src="Victory.jpg" alt="Gallery Image 4" class="w-full h-full object-cover transform hover:scale-110 transition duration-300">
                              <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                                  <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" /></svg>
                             </div>
                         </div>
-                        <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://placehold.co/600x600/333333/FFFFFF?text=Girls+Team" alt="Gallery Image 5" class="w-full h-full object-cover transform hover:scale-110 transition duration-300">
+                        <div class="gallery-item cursor-pointer relative overflow-hidden rounded-lg shadow-lg animated-card">
+                            <img src="main.jpg" alt="Gallery Image 5" class="w-full h-full object-cover transform hover:scale-110 transition duration-300">
                              <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                                  <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" /></svg>
                             </div>
@@ -584,34 +681,32 @@
             </section>
 
             <!-- Testimonials Section -->
-            <section id="testimonials" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
+            <section id="testimonials" class="py-16 sm:py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-heading text-nemtas-blue">WHAT THEY SAY</h2>
-                        <p class="text-lg text-gray-600 mt-2">Hear from our players and parents.</p>
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">WHAT THEY SAY</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">Hear from our players and parents.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <!-- Testimonial 1 -->
-                        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <div class="bg-gray-50 p-6 sm:p-8 rounded-lg shadow-md animated-card">
                             <svg class="w-10 h-10 text-nemtas-yellow mb-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a2 2 0 00-2 2v12a2 2 0 002 2h1a2 2 0 002-2V4a2 2 0 00-2-2h-1zM3 4a2 2 0 00-2 2v8a2 2 0 002 2h1a2 2 0 002-2V6a2 2 0 00-2-2H3zM17 4a2 2 0 00-2 2v8a2 2 0 002 2h1a2 2 0 002-2V6a2 2 0 00-2-2h-1z"></path></svg>
-                            <p class="text-gray-700 italic mb-6">"Joining Nemtas was the best decision I made in school. It's more than just basketball; it's about discipline, family, and pushing your limits. Coach Budi taught me skills that I'll use both on and off the court."</p>
+                            <p class="text-gray-700 italic mb-6">"Joining Nemtas was the best decision I made in school. It's more than just basketball; it's about discipline, family, and pushing your limits. Coach taught me skills that I'll use both on and off the court."</p>
                             <div class="flex items-center">
-                                <img src="https://placehold.co/50x50/EEEEEE/333333?text=Eko" alt="Eko Prasetyo" class="w-12 h-12 rounded-full mr-4">
+                                <img src="bari.jpg" alt="Bari Achmad" class="w-12 h-12 rounded-full mr-4 object-cover">
                                 <div>
-                                    <p class="font-bold text-nemtas-dark">Eko Prasetyo</p>
-                                    <p class="text-sm text-gray-500">Captain, Boys Team</p>
+                                    <p class="font-bold text-nemtas-dark">Bari Achmad</p>
+                                    <p class="text-sm text-gray-500">MVP, Boys Team</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- Testimonial 2 -->
-                         <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                         <div class="bg-gray-50 p-6 sm:p-8 rounded-lg shadow-md animated-card">
                             <svg class="w-10 h-10 text-nemtas-yellow mb-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a2 2 0 00-2 2v12a2 2 0 002 2h1a2 2 0 002-2V4a2 2 0 00-2-2h-1zM3 4a2 2 0 00-2 2v8a2 2 0 002 2h1a2 2 0 002-2V6a2 2 0 00-2-2H3zM17 4a2 2 0 00-2 2v8a2 2 0 002 2h1a2 2 0 002-2V6a2 2 0 00-2-2h-1z"></path></svg>
                             <p class="text-gray-700 italic mb-6">"As a parent, I'm so impressed with the professionalism and dedication of the Nemtas coaching staff. My daughter has not only improved her skills but has also gained so much confidence and made great friends."</p>
                              <div class="flex items-center">
                                 <img src="https://placehold.co/50x50/EEEEEE/333333?text=Parent" alt="Parent" class="w-12 h-12 rounded-full mr-4">
                                 <div>
                                     <p class="font-bold text-nemtas-dark">Ibu Wulandari</p>
-                                    <p class="text-sm text-gray-500">Parent of Siti Rahayu, Girls Team</p>
+                                    <p class="text-sm text-gray-500">Parent of Player, Girls Team</p>
                                 </div>
                             </div>
                         </div>
@@ -619,216 +714,369 @@
                 </div>
             </section>
 
+            <!-- Merchandise Section -->
+            <section id="merchandise" class="py-16 sm:py-20 bg-gray-100">
+                <div class="container mx-auto px-4 sm:px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl sm:text-4xl font-heading text-nemtas-blue">OUR MERCHANDISE</h2>
+                        <p class="text-base sm:text-lg text-gray-600 mt-2">Show your support and wear the colors with pride.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-2xl overflow-hidden grid md:grid-cols-2 items-center animated-card">
+                        <div class="relative overflow-hidden jersey-slider">
+                             <div id="jersey-slides-container">
+                                 <div class="jersey-slide">
+                                    <img src="Pink Jersey.png" alt="Nemtas Basketball Jersey Home (Pink)" class="w-full h-full object-cover">
+                                 </div>
+                                 <div class="jersey-slide">
+                                    <img src="Pink Jersey2.png" alt="Nemtas Basketball Jersey Home (Pink)" class="w-full h-full object-cover">
+                                 </div>
+                                 <div class="jersey-slide">
+                                    <img src="White Jersey.png" alt="Nemtas Basketball Jersey Away (White)" class="w-full h-full object-cover">
+                                 </div>
+                                 <div class="jersey-slide">
+                                    <img src="White Jersey2.png" alt="Nemtas Basketball Jersey Away (White)" class="w-full h-full object-cover">
+                                 </div>
+                             </div>
+                             <button id="prev-jersey" class="slider-nav">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                             </button>
+                             <button id="next-jersey" class="slider-nav">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                             </button>
+                             <div id="slider-dots-container" class="slider-dots"></div>
+                        </div>
+                        <div class="p-6 sm:p-8 md:p-12">
+                             <span class="inline-block bg-nemtas-yellow text-nemtas-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">PRE-ORDER</span>
+                            <h3 class="text-3xl sm:text-4xl font-bold text-nemtas-dark mb-4">Nemtas Official Jersey</h3>
+                            <p class="text-gray-600 mb-6">
+                                Made with high-quality, breathable fabric. Available in both <strong>home (pink)</strong> and <strong>away (white)</strong> versions.
+                            </p>
+                             <div class="mb-6">
+                                <p class="text-sm text-gray-500 mb-2">Pilih Ukuran:</p>
+                                <div id="size-selector" class="flex flex-wrap gap-2">
+                                    <button class="size-btn flex items-center justify-center px-4 h-10 sm:h-12 border border-gray-300 rounded-md font-semibold text-sm" data-size="S-XL">S - XL</button>
+                                    <button class="size-btn flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 border border-gray-300 rounded-md font-semibold text-sm" data-size="XXL">XXL</button>
+                                    <button class="size-btn flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 border border-gray-300 rounded-md font-semibold text-sm" data-size="3XL">3XL</button>
+                                    <button class="size-btn flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 border border-gray-300 rounded-md font-semibold text-sm" data-size="4XL">4XL</button>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">*Biaya tambahan Rp 10.000/size untuk ukuran di atas XL.</p>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <p id="jersey-price" class="text-3xl sm:text-4xl font-heading text-nemtas-blue">Rp 165.000</p>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-nemtas-blue p-4 rounded-r-lg mb-6">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-5 w-5 text-nemtas-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm text-nemtas-dark">
+                                            Sistem <strong>Pre-Order (PO)</strong>. Produksi dimulai setelah kuota minimum <strong>6 pcs</strong> terpenuhi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a id="buy-whatsapp-link" href="#" target="_blank" class="w-full flex items-center justify-center bg-nemtas-blue text-white font-bold py-3 sm:py-4 px-6 rounded-lg hover:bg-nemtas-dark transition duration-300 transform hover:scale-105 shadow-lg">
+                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                Info & Gabung Pre-Order
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
         
         <!-- Footer -->
         <footer class="bg-nemtas-dark text-white pt-10 pb-6">
-            <div class="container mx-auto px-6 text-center">
+            <div class="container mx-auto px-4 sm:px-6 text-center">
                 <h3 class="text-3xl font-heading tracking-wider">NEMTAS<span class="text-nemtas-yellow">.</span></h3>
                 <p class="mt-2 mb-4">Official Basketball Club of SMKN 6 South Tangerang</p>
                 <p class="text-sm text-gray-400">Jl. Griya Asri Raya, Jelupang, Kec. Serpong Utara, Kota Tangerang Selatan, Banten 15323</p>
                 <div class="flex justify-center space-x-6 my-6">
-                    <!-- Replace # with actual links -->
-                    <a href="#" class="text-2xl hover:text-nemtas-yellow transition-colors"><svg><!-- Icon placeholder --></svg></a>
-                    <a href="#" class="text-2xl hover:text-nemtas-yellow transition-colors"><svg><!-- Icon placeholder --></svg></a>
-                    <a href="#" class="text-2xl hover:text-nemtas-yellow transition-colors"><svg><!-- Icon placeholder --></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-nemtas-yellow transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.26C11.73,8.58 11.77,8.9 11.84,9.21C7.94,9 4.79,7.21 2.65,4.42C2.28,5.06 2.06,5.82 2.06,6.62C2.06,8.08 2.8,9.36 3.9,10.1C3.19,10.08 2.51,9.88 1.9,9.55V9.6C1.9,11.66 3.32,13.4 5.26,13.79C4.92,13.88 4.56,13.93 4.18,13.93C3.92,13.93 3.67,13.9 3.43,13.85C3.96,15.58 5.48,16.8 7.34,16.83C5.92,17.92 4.1,18.5 2.14,18.5C1.8,18.5 1.47,18.48 1.12,18.44C2.98,19.65 5.17,20.33 7.5,20.33C16.08,20.33 20.21,13.37 20.21,8.74C20.21,8.55 20.21,8.37 20.2,8.18C21.01,7.62 21.8,6.87 22.46,6Z" /></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-nemtas-yellow transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-nemtas-yellow transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M10,9.5V14.5L15,12L10,9.5Z" /></svg></a>
                 </div>
                 <p class="text-xs text-gray-500">&copy; 2025 Nemtas Basketball Club. All Rights Reserved.</p>
             </div>
         </footer>
     </div>
+    
+    <!-- Player Detail Modal -->
+    <div id="player-detail-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[60] p-4">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-md relative text-center overflow-hidden">
+            <button id="close-player-modal-btn" class="absolute top-2 right-2 w-8 h-8 bg-gray-200 rounded-full text-gray-600 hover:bg-gray-300 transition z-10">&times;</button>
+            <div class="p-8">
+                <img id="modal-player-image-thumb" src="" class="w-32 h-32 rounded-full border-4 border-nemtas-yellow shadow-lg object-cover mx-auto mb-4">
+                <h3 id="modal-player-name" class="text-3xl font-heading text-nemtas-dark"></h3>
+                <div class="flex justify-center items-center gap-4 my-2">
+                    <span id="modal-player-number" class="text-xl font-bold text-nemtas-blue"></span>
+                    <span class="text-gray-400">•</span>
+                    <span id="modal-player-position" class="text-lg text-gray-600"></span>
+                </div>
+                <p id="modal-player-bio" class="text-gray-600 my-6"></p>
+                <button id="modal-view-highlights-btn" class="w-full flex items-center justify-center bg-nemtas-yellow text-nemtas-blue font-bold py-3 px-6 rounded-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
+                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                    View Highlights
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Video Modal -->
-    <div id="highlight-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[60] hidden p-4">
-        <div class="bg-black p-2 rounded-lg shadow-2xl w-full max-w-4xl relative">
-            <button id="close-modal-btn" class="absolute -top-3 -right-3 md:top-0 md:-right-12 w-10 h-10 bg-white rounded-full text-nemtas-blue text-3xl font-bold flex items-center justify-center z-10">&times;</button>
-            
+    <div id="highlight-modal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[70] p-4">
+        <div class="modal-content bg-black p-2 rounded-lg shadow-2xl w-full max-w-4xl relative">
+            <button id="close-video-modal-btn" class="absolute -top-3 -right-3 md:top-0 md:-right-12 w-10 h-10 bg-white rounded-full text-nemtas-blue text-3xl font-bold flex items-center justify-center z-10">&times;</button>
             <div id="video-slider" class="relative overflow-hidden">
-                <div id="video-slides-container" class="flex transition-transform duration-300 ease-in-out">
-                    <!-- Slides will be inserted here by JS -->
-                </div>
+                <div id="video-slides-container" class="flex transition-transform duration-300 ease-in-out"></div>
             </div>
-
-            <button id="prev-video-btn" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </button>
-            <button id="next-video-btn" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
+            <button id="prev-video-btn" class="slider-nav left-2"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+            <button id="next-video-btn" class="slider-nav right-2"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
         </div>
     </div>
 
     <!-- Gallery Modal -->
-    <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden p-4">
+    <div id="gallery-modal" class="modal fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[70] p-4">
         <button id="close-gallery-btn" class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full text-nemtas-blue text-3xl font-bold flex items-center justify-center z-10">&times;</button>
         <img id="gallery-modal-img" src="" alt="Gallery image" class="max-w-full max-h-full rounded-lg">
     </div>
 
     <script>
-        // --- START: Updated Mobile Menu Logic ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenuButton.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
-        });
-
-        // Close mobile menu when a link is clicked
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuButton.classList.remove('open');
-                mobileMenu.classList.remove('open');
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuButton.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
             });
-        });
-        // --- END: Updated Mobile Menu Logic ---
-
-        // Active Navigation Link on Scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('header nav a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuButton.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                });
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('nav-link-active');
-                if (link.href.includes(current)) {
-                    link.classList.add('nav-link-active');
-                }
+            // --- Active Navigation Link on Scroll ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav a');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+            const activateLink = (current) => {
+                 navLinks.forEach(link => {
+                    link.classList.remove('nav-link-active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('nav-link-active');
+                    }
+                });
+                mobileNavLinks.forEach(link => {
+                    link.classList.remove('text-nemtas-yellow');
+                     if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('text-nemtas-yellow');
+                    }
+                });
+            };
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                       activateLink(entry.target.id);
+                    }
+                });
+            }, { rootMargin: '-30% 0px -70% 0px'});
+            sections.forEach(section => scrollObserver.observe(section));
+            
+            // --- Generic Modal Open/Close Logic ---
+            const openModal = (modal) => modal.classList.add('open');
+            const closeModal = (modal) => modal.classList.remove('open');
+
+            // --- Player Detail Modal Logic ---
+            const playerCards = document.querySelectorAll('.player-card');
+            const playerModal = document.getElementById('player-detail-modal');
+            const closePlayerModalBtn = document.getElementById('close-player-modal-btn');
+            
+            // Elements inside player modal
+            const modalPlayerImageThumb = document.getElementById('modal-player-image-thumb');
+            const modalPlayerName = document.getElementById('modal-player-name');
+            const modalPlayerNumber = document.getElementById('modal-player-number');
+            const modalPlayerPosition = document.getElementById('modal-player-position');
+            const modalPlayerBio = document.getElementById('modal-player-bio');
+            const modalViewHighlightsBtn = document.getElementById('modal-view-highlights-btn');
+
+            playerCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const data = card.dataset;
+                    modalPlayerName.textContent = data.playerName;
+                    modalPlayerImageThumb.src = data.playerImage;
+                    modalPlayerNumber.textContent = data.playerNumber;
+                    modalPlayerPosition.textContent = data.playerPosition;
+                    modalPlayerBio.textContent = data.playerBio;
+
+                    if (data.playerVideos && data.playerVideos.trim() !== '') {
+                        modalViewHighlightsBtn.style.display = 'flex';
+                        modalViewHighlightsBtn.dataset.videos = data.playerVideos;
+                    } else {
+                        modalViewHighlightsBtn.style.display = 'none';
+                    }
+                    openModal(playerModal);
+                });
             });
-        });
-        
-        // Video Modal Logic
-        const playerVideoCards = document.querySelectorAll('.player-card[data-video-files]');
-        const highlightModal = document.getElementById('highlight-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const videoSlidesContainer = document.getElementById('video-slides-container');
-        const prevVideoBtn = document.getElementById('prev-video-btn');
-        const nextVideoBtn = document.getElementById('next-video-btn');
-        const baseVideoUrl = "https://www.youtube.com/embed/";
-        let currentSlide = 0;
-        let totalSlides = 0;
+            
+            closePlayerModalBtn.addEventListener('click', () => closeModal(playerModal));
+            playerModal.addEventListener('click', (e) => e.target === playerModal && closeModal(playerModal));
+            
+            // --- Video Highlight Modal Logic ---
+            const highlightModal = document.getElementById('highlight-modal');
+            const closeVideoModalBtn = document.getElementById('close-video-modal-btn');
+            const videoSlidesContainer = document.getElementById('video-slides-container');
+            const prevVideoBtn = document.getElementById('prev-video-btn');
+            const nextVideoBtn = document.getElementById('next-video-btn');
+            let currentVideoSlide = 0;
 
-        playerVideoCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const videoFiles = card.dataset.videoFiles.split(',').map(file => file.trim());
-                if (videoFiles.length > 0 && videoFiles[0]) { // Check if not empty
-                    currentSlide = 0;
-                    totalSlides = videoFiles.length;
-                    videoSlidesContainer.innerHTML = ''; // Clear previous slides
-
-                    videoFiles.forEach((file, index) => {
-                        const slide = document.createElement('div');
-                        slide.className = 'video-slide w-full flex-shrink-0';
-                        
-                        slide.innerHTML = `
-                            <div class="relative w-full" style="padding-bottom: 56.25%;"> <!-- 16:9 -->
+            const openVideoModal = (videos) => {
+                const videoFiles = videos.split(',').map(f => f.trim());
+                if (videoFiles.length > 0) {
+                    currentVideoSlide = 0;
+                    videoSlidesContainer.innerHTML = videoFiles.map(file => `
+                        <div class="video-slide w-full flex-shrink-0">
+                            <div class="relative w-full" style="padding-bottom: 56.25%;">
                                 <video class="absolute top-0 left-0 w-full h-full" src="${file}" controls autoplay muted loop playsinline></video>
                             </div>
-                        `;
-                        videoSlidesContainer.appendChild(slide);
-                    });
-                    
-                    updateSlider();
-                    highlightModal.classList.remove('hidden');
+                        </div>
+                    `).join('');
+                    updateVideoSliderUI(videoFiles.length);
+                    openModal(highlightModal);
+                }
+            };
+
+            modalViewHighlightsBtn.addEventListener('click', () => {
+                const videos = modalViewHighlightsBtn.dataset.videos;
+                if(videos) {
+                    closeModal(playerModal);
+                    openVideoModal(videos);
                 }
             });
-        });
 
-        function updateSlider() {
-            videoSlidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-            // Hide/show nav buttons
-            prevVideoBtn.style.display = totalSlides > 1 ? 'block' : 'none';
-            nextVideoBtn.style.display = totalSlides > 1 ? 'block' : 'none';
-        }
+            const updateVideoSliderUI = (total) => {
+                videoSlidesContainer.style.transform = `translateX(-${currentVideoSlide * 100}%)`;
+                prevVideoBtn.style.display = total > 1 ? 'block' : 'none';
+                nextVideoBtn.style.display = total > 1 ? 'block' : 'none';
+            };
 
-        function stopAllVideos() {
-            const videos = videoSlidesContainer.querySelectorAll('video');
-            videos.forEach(video => {
-                video.pause();
-                video.currentTime = 0;
+            const stopAllVideos = () => {
+                videoSlidesContainer.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; });
+            };
+
+            nextVideoBtn.addEventListener('click', () => {
+                const total = videoSlidesContainer.children.length;
+                currentVideoSlide = (currentVideoSlide + 1) % total;
+                updateVideoSliderUI(total);
             });
-        }
 
-        nextVideoBtn.addEventListener('click', () => {
-            stopAllVideos();
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        });
-
-        prevVideoBtn.addEventListener('click', () => {
-            stopAllVideos();
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        });
-
-        const closeModal = () => {
-            highlightModal.classList.add('hidden');
-            stopAllVideos();
-            videoSlidesContainer.innerHTML = ''; // Clean up
-        };
-
-        closeModalBtn.addEventListener('click', closeModal);
-        highlightModal.addEventListener('click', (e) => {
-            if (e.target === highlightModal) {
-                closeModal();
-            }
-        });
-
-        // Gallery Modal Logic
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const galleryModal = document.getElementById('gallery-modal');
-        const galleryModalImg = document.getElementById('gallery-modal-img');
-        const closeGalleryBtn = document.getElementById('close-gallery-btn');
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const imgSrc = item.querySelector('img').src;
-                galleryModalImg.src = imgSrc.replace(/600x600|1200x1200/, '1200x1200'); // Load a larger version
-                galleryModal.classList.remove('hidden');
+            prevVideoBtn.addEventListener('click', () => {
+                const total = videoSlidesContainer.children.length;
+                currentVideoSlide = (currentVideoSlide - 1 + total) % total;
+                updateVideoSliderUI(total);
             });
-        });
-
-        const closeGalleryModal = () => {
-            galleryModal.classList.add('hidden');
-        }
-
-        closeGalleryBtn.addEventListener('click', closeGalleryModal);
-        galleryModal.addEventListener('click', (e) => {
-            if(e.target === galleryModal) {
-                closeGalleryModal();
-            }
-        });
-
-        // --- START: News Section Animation on Scroll ---
-        const newsCards = document.querySelectorAll('.news-card');
-
-        const observerOptions = {
-            root: null, // relative to the viewport
-            rootMargin: '0px',
-            threshold: 0.1 // trigger when 10% of the item is visible
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Animate only once
+            
+            closeVideoModalBtn.addEventListener('click', () => {
+                closeModal(highlightModal);
+                stopAllVideos();
+            });
+            highlightModal.addEventListener('click', (e) => {
+                 if (e.target === highlightModal) {
+                    closeModal(highlightModal);
+                    stopAllVideos();
                 }
             });
-        }, observerOptions);
 
-        newsCards.forEach(card => {
-            observer.observe(card);
+            // --- Gallery Modal Logic ---
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryModal = document.getElementById('gallery-modal');
+            const galleryModalImg = document.getElementById('gallery-modal-img');
+            const closeGalleryBtn = document.getElementById('close-gallery-btn');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    galleryModalImg.src = item.querySelector('img').src.replace(/(\?|&)text=[^&]*/, '');
+                    openModal(galleryModal);
+                });
+            });
+            closeGalleryBtn.addEventListener('click', () => closeModal(galleryModal));
+            galleryModal.addEventListener('click', (e) => e.target === galleryModal && closeModal(galleryModal));
+
+            // --- Animated Cards on Scroll ---
+            const animatedCards = document.querySelectorAll('.animated-card');
+            const cardObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedCards.forEach(card => cardObserver.observe(card));
+            
+            // --- Jersey Slider Logic ---
+            const jerseySlidesContainer = document.getElementById("jersey-slides-container");
+            const jerseySlides = jerseySlidesContainer.querySelectorAll(".jersey-slide");
+            const prevJerseyBtn = document.getElementById("prev-jersey");
+            const nextJerseyBtn = document.getElementById("next-jersey");
+            const dotsContainer = document.getElementById("slider-dots-container");
+            let currentJerseySlide = 0;
+
+            if (jerseySlides.length > 0) {
+                jerseySlides.forEach((_, i) => {
+                    const dot = document.createElement("button");
+                    dot.classList.add("slider-dot");
+                    dot.addEventListener("click", () => showJerseySlide(i));
+                    dotsContainer.appendChild(dot);
+                });
+                const dots = dotsContainer.querySelectorAll(".slider-dot");
+
+                const showJerseySlide = (index) => {
+                    jerseySlidesContainer.style.transform = `translateX(-${index * 100}%)`;
+                    dots.forEach(d => d.classList.remove("active"));
+                    dots[index].classList.add("active");
+                    currentJerseySlide = index;
+                };
+
+                prevJerseyBtn.addEventListener("click", () => showJerseySlide((currentJerseySlide - 1 + jerseySlides.length) % jerseySlides.length));
+                nextJerseyBtn.addEventListener("click", () => showJerseySlide((currentJerseySlide + 1) % jerseySlides.length));
+                showJerseySlide(0);
+            }
+
+            // --- Merchandise Price Logic ---
+            const sizeSelector = document.getElementById('size-selector');
+            const sizeButtons = sizeSelector.querySelectorAll('.size-btn');
+            const priceDisplay = document.getElementById('jersey-price');
+            const buyLink = document.getElementById('buy-whatsapp-link');
+            
+            const basePrice = 165000;
+            const priceIncrement = 10000;
+            const phone = '6281223455709';
+            const sizeMap = { 'S-XL': 0, 'XXL': 1, '3XL': 2, '4XL': 3 };
+
+            const updatePriceAndLink = (selectedSize) => {
+                let newPrice = basePrice + ((sizeMap[selectedSize] || 0) * priceIncrement);
+                priceDisplay.textContent = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(newPrice);
+                priceDisplay.classList.remove('price-animation');
+                void priceDisplay.offsetWidth;
+                priceDisplay.classList.add('price-animation');
+                const message = `Halo, saya tertarik dengan Jersey resmi Nemtas dan ingin bergabung dalam Pre-Order untuk ukuran ${selectedSize}. Mohon informasinya.`;
+                buyLink.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+            };
+
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    sizeButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    updatePriceAndLink(button.dataset.size);
+                });
+            });
+
+            sizeSelector.querySelector('[data-size="S-XL"]')?.click();
         });
-        // --- END: News Section Animation on Scroll ---
-
     </script>
 
 </body>
